@@ -5,7 +5,12 @@ on:
     branches: [ "main", "test" ]
   pull_request:
     branches: [ "main", "test" ]
-
+    
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+  
 jobs:
   scan:
     runs-on: ubuntu-latest
@@ -16,5 +21,5 @@ jobs:
     - name: Run Custom Action for Vulnerability Scan
       uses: jeelgajera/test-gh-action@beta.1
       with:
-        deploymet_url: 'https://test-apirepo-action.vercel.app/'
+        deployment_url: 'https://test-apirepo-action.vercel.app/'
         github_token: ${{ secrets.GITHUB_TOKEN }}
