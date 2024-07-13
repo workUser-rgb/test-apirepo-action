@@ -1,7 +1,6 @@
-import { ScanInfo } from '@/types/scaninfo.type';
+import scanManager from '@/data/scans.data';
+import { NextResponse } from 'next/server';
 import { v4 as uuidv4 } from 'uuid';
-
-let scans: { [key: string]: ScanInfo } = {};
 
 
 export async function POST(req: Request) {
@@ -28,13 +27,7 @@ export async function POST(req: Request) {
         scanInitiated: new Date().toISOString()
     };
 
-    if (Object.keys(scans).length >= 10) {
-        // manage server memeory :)
-        scans = {};
-    }
-
-    scans[scanId] = scanData;
-    return Response.json({ scanData })
+    scanManager.addScan(scanData);
+    
+    return NextResponse.json({ scanData })
 }
-
-export { scans };
