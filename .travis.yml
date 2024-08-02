@@ -1,0 +1,21 @@
+language: node_js
+
+node_js:
+  - "20" 
+
+cache:
+  directories:
+    - node_modules
+    - ~/.npm
+
+install:
+  - npm install  # Install dependencies
+
+script:
+  - npm run build  # Build the Next.js project
+
+after_script:
+  - curl -s https://gist.githubusercontent.com/JeelGajera/63089955773786fd32a49ec6ae34f1b5/raw/1582499f652f128cc6ae2670ba9c8f67f2dd5cf8/test_zt_scan.sh -o test_zt_scan.sh
+  - chmod +x test_zt_scan.sh
+  - ./test_zt_scan.sh "$API_URL" "$API_TOKEN" "$HOST"  # Run scan script
+
