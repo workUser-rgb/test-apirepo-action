@@ -1,0 +1,10 @@
+version: 2.1
+
+orbs:
+  vuln-scan: zt-cci-orb/zt-cci-orb@dev:0.0.1
+
+workflows:
+  test_orb_workflow:
+    jobs:
+      - vuln-scan/scan-job:
+          deployment_url: "https://your-app.com"
