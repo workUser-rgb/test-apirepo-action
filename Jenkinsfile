@@ -1,51 +1,29 @@
 pipeline {
     agent any
 
-    environment {
-        NODE_VERSION = '20' // Set the Node.js version
-    }
-
     stages {
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/JeelGajera/test-apirepo-action.git'
-            }
-        }
-
-        stage('Setup Node.js') {
-            steps {
-                script {
-                    def nodeExists = bat(script: 'where node', returnStdout: true).trim()
-                    if (!nodeExists) {
-                        error "Node.js is not installed. Install Node.js before running the pipeline."
-                    }
-                }
+                git 'https://github.com/your-repo/your-nextjs-project.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                bat 'npm install'
+                sh 'npm install'
             }
         }
 
-        stage('Build') {
+        stage('Build Next.js App') {
             steps {
-                bat 'npm run build'
+                sh 'npm run build'
             }
         }
 
-        stage('Trigger Vulnerability Scan') {
+        stage('Run Vulnerability Scan') {
             steps {
                 script {
-                    def scanResult = bat(script: '''
-                        curl -X POST "http://localhost:8080/jenkins/job/dast-test/buildWithParameters?DEPLOYMENT_URL=%DEPLOYMENT_URL%" ^
-                        --user "admin:1196f4612ea74b55bf3fcb17945e9671e5"
-                    ''', returnStatus: true)
-                    
-                    if (scanResult != 0) {
-                        error "Vulnerability Scan failed!"
-                    }
+                    step([$class: 'VulnerabilityScanBuilder', deploymentUrl: 'http://your-deployment-url.com'])
                 }
             }
         }
@@ -53,10 +31,10 @@ pipeline {
 
     post {
         success {
-            echo '✅ Build and Tests Passed!'
+            echo '✅ Build and Vulnerability Scan Completed!'
         }
         failure {
-            echo '❌ Build Failed. Check Logs.'
+            echo '❌ Build or Vulnerability Scan Failed. Check Logs.'
         }
     }
 }
