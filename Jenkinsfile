@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/your-repo/your-nextjs-project.git'
+                git 'https://github.com/JeelGajera/test-apirepo-action.git'
             }
         }
 
@@ -23,7 +23,7 @@ pipeline {
         stage('Run Vulnerability Scan') {
             steps {
                 script {
-                    step([$class: 'VulnerabilityScanBuilder', deploymentUrl: 'http://your-deployment-url.com'])
+                    step([$class: 'VulnerabilityScanBuilder', deploymentUrl: 'http://vulnerable.zerothreat.ai'])
                 }
             }
         }
