@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/JeelGajera/test-apirepo-action.git'
+                git branch: 'main', url: 'https://github.com/JeelGajera/test-apirepo-action.git'
             }
         }
 
