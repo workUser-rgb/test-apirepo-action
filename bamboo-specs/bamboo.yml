@@ -6,7 +6,7 @@ plan:
   name: "ZeroThreatAI Scan Plan"
 
 stages:
-  - stage: "Build and Scan"
+  - "Build and Scan"
     jobs:
       - job: "Default Job"
         key: JOB1
