@@ -11,7 +11,7 @@ stages:
         - Fetch project
   - Build Project:
       jobs:
-        - Dependency install & build project
+        - Dependency install and build project
   - ZT Vulnerability Scan:
       jobs:
         - Scan Web Application
@@ -21,7 +21,7 @@ Fetch project:
     - checkout:
         description: "Checkout Default Repository"
         
-Dependency install & build project:
+Dependency install and build project:
   tasks:
     - npm:
         description: "Install Deps"
