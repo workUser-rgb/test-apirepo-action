@@ -3,16 +3,16 @@ version: 2
 plan:
   project-key: TBS
   key: ZTSCAN
-  name: "ZeroThreatAI Scan Plan"
+  name: ZeroThreatAI Scan Plan
   
 stages:
-  - Setup Project
+  - Setup Project:
       jobs:
         - Fetch project
-  - Build Project
+  - Build Project:
       jobs:
         - Dependency install & build project
-  - ZT Vulnerability Scan
+  - ZT Vulnerability Scan:
       jobs:
         - Scan Web Application
 
