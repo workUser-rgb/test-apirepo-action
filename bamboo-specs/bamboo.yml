@@ -1,7 +1,7 @@
 version: 2
 
 plan:
-  project-key: TES
+  project-key: TBS
   key: ZTSCAN
   name: "ZeroThreatAI Scan Plan"
   
