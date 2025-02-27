@@ -23,12 +23,10 @@ Fetch project:
         
 Dependency install and build project:
   tasks:
-    - npm:
-        description: "Install Deps"
-        command: "install"
-    - npm:
-        description: "Build NextJS Project"
-        command: "run build"
+    - script:
+      - npm install
+    - script:
+      - npm run build
 
 Scan Web Application:
   tasks:
