@@ -1,24 +1,41 @@
 version: 2
 
 plan:
-  project-key: TEST
+  project-key: TES
   key: ZTSCAN
   name: "ZeroThreatAI Scan Plan"
-  stages:
-    - name: "Build and Scan"
+  
+stages:
+  - Setup Project
       jobs:
-        - key: JOB1
-          name: "Default Job"
-          tasks:
-            - checkout:
-                description: "Checkout Default Repository"
-            - npm:
-                description: "Install Deps"
-                command: "install"
-            - npm:
-                description: "Build NextJS Project"
-                command: "run build"
-            - custom:
-                plugin-key: "com.zerothreatai.plugins.zt-bamboo-plugin:zt-vulnerability-scan-task"
-                configuration:
-                  deploymentUrl: "https://example.com/my-app"
+        - Fetch project
+  - Build Project
+      jobs:
+        - Dependency install & build project
+  - ZT Vulnerability Scan
+      jobs:
+        - Scan Web Application
+
+Fetch project:
+  tasks:
+    - checkout:
+        description: "Checkout Default Repository"
+        
+Dependency install & build project:
+  tasks:
+    - npm:
+        description: "Install Deps"
+        command: "install"
+    - npm:
+        description: "Build NextJS Project"
+        command: "run build"
+
+Scan Web Application:
+  tasks:
+    - custom:
+        plugin-key: "com.zerothreatai.plugins.zt-bamboo-plugin:zt-vulnerability-scan-task"
+        configuration:
+          deploymentUrl: "https://example.com/my-app"
+
+            
+            
