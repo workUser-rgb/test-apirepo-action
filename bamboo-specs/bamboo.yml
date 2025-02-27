@@ -30,7 +30,7 @@ Dependency install and build project:
 
 Scan Web Application:
   tasks:
-    - custom:
+    - any-task:
         plugin-key: "com.zerothreatai.plugins.zt-bamboo-plugin:zt-vulnerability-scan-task"
         configuration:
           deploymentUrl: "https://example.com/my-app"
