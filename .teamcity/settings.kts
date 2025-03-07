@@ -1,11 +1,12 @@
-package _Self.buildTypes
-
 import jetbrains.buildServer.configs.kotlin.*
+import jetbrains.buildServer.configs.kotlin.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.buildSteps.nodeJS
 
-object TestRepoPipeline : BuildType({
-    name = "test-repo-pipeline"
+version = "2024.12"
 
+object TestRepoPipeline : BuildType({
+    name = "Test Repo Pipeline"
+    id("test-repo-pipeline")
     steps {
         nodeJS {
             name = "Build Project & Install Deps"
