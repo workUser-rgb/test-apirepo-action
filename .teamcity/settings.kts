@@ -4,7 +4,7 @@ import jetbrains.buildServer.configs.kotlin.*
 import jetbrains.buildServer.configs.kotlin.buildSteps.nodeJS
 
 object TestRepoPipeline : BuildType({
-    name = "zt-test-plugin"
+    name = "test-repo-pipeline"
 
     steps {
         nodeJS {
