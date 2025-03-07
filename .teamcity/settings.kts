@@ -1,4 +1,7 @@
-version = "2024.12"
+package _Self.buildTypes
+
+import jetbrains.buildServer.configs.kotlin.*
+import jetbrains.buildServer.configs.kotlin.buildSteps.nodeJS
 
 project {
     // Define a VCS root for your repository.
@@ -18,35 +21,21 @@ object MyGitVcs : GitVcsRoot({
 
 // Build configuration that defines your build pipeline.
 object MyBuildPipeline : BuildType({
-    name = "Test Build Pipeline"
-
-    vcs {
-        root(MyGitVcs)
-    }
-
+    name = "zt-test-plugin"
     steps {
-        // Step 1: Install dependencies using npm.
-        script {
-            name = "Install Dependencies"
-            scriptContent = "npm i"
+        nodeJS {
+            name = "Build Project & Install Deps"
+            id = "Build_Project_Install_Deps"
+            shellScript = """
+                npm ci
+                npm run build
+            """.trimIndent()
         }
-
-        // Step 2: Build the project.
-        script {
-            name = "Build Project"
-            scriptContent = "npm run build"
-        }
-
-        // Step 3: Run the Vulnerability Scan using your custom runner.
-        // Use the 'custom' build step to invoke your runner.
-        custom {
+        step {
             name = "Vulnerability Scan"
-            // runner type ID.
+            id = "Vulnerability_Scan"
             type = "vulnerabilityScanRunner"
-            // Add runner parameters as needed.
             param("deploymentUrl", "https://demo.com")
         }
-    }
+}})
 
-    // Optionally, add triggers, failure conditions, etc.
-})
