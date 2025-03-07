@@ -1,8 +1,6 @@
 import jetbrains.buildServer.configs.kotlin.*
-import jetbrains.buildServer.configs.kotlin.buildSteps.script
-import jetbrains.buildServer.configs.kotlin.buildSteps.nodeJS
 
-version = "2024.12"
+version = "2024.12.2"
 
 project {
     buildType(TestRepoPipeline)
