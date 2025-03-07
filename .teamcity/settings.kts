@@ -4,6 +4,10 @@ import jetbrains.buildServer.configs.kotlin.buildSteps.nodeJS
 
 version = "2024.12"
 
+project {
+    buildType(TestRepoPipeline)
+}
+
 object TestRepoPipeline : BuildType({
     name = "Test Repo Pipeline"
     id("test-repo-pipeline")
