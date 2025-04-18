@@ -16,7 +16,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Run Custom Action for Vulnerability Scan
-      uses: workUser-rgb/github-action-test
+      uses: workUser-rgb/github-action-test@main
       with:
         ZT_TOKEN: ${{ secrets.ZT_TOKEN }
         WAIT_FOR_ANALYSIS: false
